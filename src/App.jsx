@@ -29,6 +29,12 @@ function App() {
     })
   }
 
+  function deleteItem(id){
+    setTodos(currentTodos => {
+      return currentTodos.filter(todo => todo.id != id)
+    })
+  }
+
   return( 
   <>
     <form className="new-item-form" onSubmit={handleSubmit}>
@@ -40,6 +46,7 @@ function App() {
     </form>
     <h1>Todo List</h1>
     <ul className="list"> 
+        {todos.length === 0 && <h3>No todos</h3>}
         {todos.map(todo =>{
           return <>
           <li key={todo.id}>
@@ -47,7 +54,7 @@ function App() {
           <input type="checkbox" checked={todo.completed} onChange={e => toggleTodo(todo.id, e.target.checked)}/>
            {todo.title}
           </label>
-          <button className='btn btn-danger'>Delete</button>
+          <button className='btn btn-danger' onClick={() => deleteItem(todo.id)}>Delete</button>
           </li>
         </>
         })}  
