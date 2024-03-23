@@ -15,7 +15,18 @@ function App() {
         {id: crypto.randomUUID(), title: newItem, completed:false},
       ]
     })
-    document.getElementsByClassName("list")
+    setNewItem("")
+  }
+
+  function toggleTodo(id, completed){
+    setTodos(currentTodos=>{
+      return currentTodos.map(todo =>{
+        if(todo.id == id){
+          return {...todo, completed}
+        }
+        return todo
+      })
+    })
   }
 
   return( 
@@ -31,9 +42,9 @@ function App() {
     <ul className="list"> 
         {todos.map(todo =>{
           return <>
-          <li>
+          <li key={todo.id}>
           <label>
-          <input type="checkbox"/>
+          <input type="checkbox" checked={todo.completed} onChange={e => toggleTodo(todo.id, e.target.checked)}/>
            {todo.title}
           </label>
           <button className='btn btn-danger'>Delete</button>
