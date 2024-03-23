@@ -17,7 +17,7 @@ function App() {
     })
     document.getElementsByClassName("list")
   }
-  console.log(todos);
+
   return( 
   <>
     <form className="new-item-form" onSubmit={handleSubmit}>
